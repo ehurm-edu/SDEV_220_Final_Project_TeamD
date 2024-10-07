@@ -23,15 +23,27 @@
                         <td>
                             <a href="{% url 'vieworg' %}">Organizations</a>
                         </td>
-                        <td>
+
+                            {% if request.user.is_authenticated %}
+                            <td>
                             <a href="{% url 'addpet' %}">Add a pet</a>
-                        </td> 
-                        <td>
+                            </td> 
+                            {% endif %}
+
+
+                            {% if request.user.is_authenticated %}
+                            <td>
                             <a href="{% url 'addfoster' %}">Add a foster</a>
-                        </td>
-                        <td>
+                            </td>
+                            {% endif %}
+
+
+                            {% if request.user.is_authenticated %}
+                            <td>
                             <a href="{% url 'addorg' %}">Add an organization</a>
-                        </td>      
+                            </td>    
+                            {% endif %}
+  
                     </tr>
                 </table>
             </div>
