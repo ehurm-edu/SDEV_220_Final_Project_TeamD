@@ -15,7 +15,7 @@ stateSelection = [('al', 'AL'), ('ak', 'AK'), ('az', 'AZ'), ('ar', 'AR'), ('ca',
     ('sc', 'SC'), ('sd', 'SD'), ('tn', 'TN'), ('tx', 'TX'), ('ut', 'UT'), ('vt', 'VT'), ('va', 'VA'), ('wa', 'WA'), ('wv', 'WV'), ('wi', 'WI'), 
     ('wy', 'WY')]
 
-
+'''
 class PetForm(forms.Form):
     petMicrochipID = forms.CharField(label="Microchip ID", required=False)
     petName = forms.CharField(widget=forms.TextInput, label="Name")
@@ -48,8 +48,9 @@ class FosterForm(forms.Form):
     fosterZip = forms.CharField(widget=forms.NumberInput(attrs={'max':99999}),  label="Zip")
     fosterEmail = forms.EmailField(widget=forms.TextInput,label="Email")
     fosterPhone = forms.CharField(widget=forms.TextInput, label="Phone Number")
+'''
     
-class PetFormAuto(forms.ModelForm):
+class PetForm(forms.ModelForm):
     class Meta:
         model = Pet
         fields = ['petMicrochipID', 'petName', 'petType', 'petSex', 'petDOB', 'petSpayNeuter', 'petStatus', 
@@ -62,7 +63,7 @@ class PetFormAuto(forms.ModelForm):
             'petRecords': forms.FileInput,
             }
         
-class OrgFormAuto(forms.ModelForm):
+class OrgForm(forms.ModelForm):
     class Meta:
         model = Organization
         fields = ['orgID','orgName','orgContact','orgStreet','orgCity','orgState','orgZip','orgEmail','orgPhone']
@@ -72,7 +73,7 @@ class OrgFormAuto(forms.ModelForm):
             'orgEmail': forms.EmailInput,
                 }
     
-class FosterFormAuto(forms.ModelForm):
+class FosterForm(forms.ModelForm):
     class Meta:
         model = Foster
         fields = ['fosterID','fosterName','fosterStreet','fosterCity','fosterState','fosterZip','fosterEmail','fosterPhone']

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pettracker.css' %}">
+</head>
+    <body>
+        </header>
+            <div class="navheader">
+                <table>
+                    <tr>
+                        <td>
+                            <a href="{% url 'index' %}">Home</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'viewpets' %}">Our Pets</a>
+                        </td> 
+                        <td>
+                            <a href="{% url 'viewfoster' %}">Fosters</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'vieworg' %}">Organizations</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'addpet' %}">Add a pet</a>
+                        </td> 
+                        <td>
+                            <a href="{% url 'addfoster' %}">Add a foster</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'addorg' %}">Add an organization</a>
+                        </td>      
+                    </tr>
+                </table>
+            </div>
+        </header>
+        <main class="container"></main>
+            <div class="row">
+                <div class="col">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

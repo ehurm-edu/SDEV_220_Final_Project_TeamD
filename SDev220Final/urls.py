@@ -31,6 +31,9 @@ urlpatterns = [
     path('fosters/<int:fosterID>/', views.fosterDetail, name="fosterdetail"),
     path("vieworgs/", views.viewOrg, name="vieworg"),
     path('orgs/<int:orgID>/', views.orgDetail, name="orgdetail"),
+    path("addpet/", views.addPet, name="addpet"),
+    path("addfoster/", views.addFoster, name="addfoster"),
+    path("addorg/", views.addOrg, name="addorg"),
 
 ]
 

@@ -36,6 +36,7 @@ def orgDetail(request, orgID):
 
 
 def addPet(request):
+    form = PetForm()
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
         if form.is_valid():
@@ -48,6 +49,7 @@ def addPet(request):
 
 
 def addOrg(request):
+    form = OrgForm()
     if request.method == 'POST':
         form = OrgForm(request.POST, request.FILES)
         if form.is_valid():
@@ -59,6 +61,7 @@ def addOrg(request):
     return render(request, 'addorg.html', context)
 
 def addFoster(request):
+    form = FosterForm()
     if request.method == 'POST':
         form = FosterForm(request.POST, request.FILES)
         if form.is_valid():

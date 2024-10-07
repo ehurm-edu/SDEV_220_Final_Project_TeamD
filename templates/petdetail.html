@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+{% block content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ pet.petName }}'s profile</title>
 </head>
 <body>
-
-    <div class="navheader">
-        <table>
-            <tr>
-                <td>
-                    <a href="{% url 'index' %}">Home</a>
-                </td>
-                <td>
-                    <a href="{% url 'viewpets' %}">Our Pets</a>
-                </td> 
-                <td>
-                    <a href="{% url 'viewfoster' %}">Fosters</a>
-                </td>
-                <td>
-                    <a href="{% url 'vieworg' %}">Organizations</a>
-                </td>
-                <td>
-                    <a href="{% url 'index' %}">Add a pet</a>
-                </td> 
-                <td>
-                    <a href="{% url 'index' %}">Add a foster</a>
-                </td>
-                <td>
-                    <a href="{% url 'index' %}">Add an organization</a>
-                </td>      
-            </tr>
-        </table>
-    </div>
     Name: {{ pet.petName }}<br>
     Type: {{ pet.petType }}<br>
     Sex: {{ pet.petSex}}<br>
@@ -58,7 +29,5 @@
     Bio:<br> {{pet.petBio}}<br><br>
 
     <a href="/viewpets">Back</a>
-
-
 </body>
-</html>
+{% endblock %}
