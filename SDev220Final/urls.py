@@ -18,22 +18,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from PetTracker import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
+    path("", views.index, name="index"),
+    path("index", views.index, name="index"),
     path("admin/", admin.site.urls),
-    path("addfoster.html", views.addFoster, name="addfoster"),
-    path("addorg.html", views.addOrg, name="addorg"),
-    path("addpet.html", views.addPet, name="addpet"),
-    path("fostersubmit.html", views.fosterSubmit, name="fostersubmit"),
-    path("index.html", views.index, name="index"),
-    path("orgsubmit.html", views.orgSubmit, name="orgsubmit"),
-    path("petsubmit.html", views.petSubmit, name="petsubmit"),
-    path("viewpets.html", views.viewPet, name="viewpets"),
-    path("", views.index, name="rootview"),
-    
-    
-    
-    
+    path("viewpets/", views.viewPet, name="viewpets"),
+    path('pets/<int:petID>/', views.petDetail, name='petdetail'),
+    path("viewfosters/", views.viewFoster, name="viewfoster"),
+    path('fosters/<int:fosterID>/', views.fosterDetail, name="fosterdetail"),
+    path("vieworgs/", views.viewOrg, name="vieworg"),
+    path('orgs/<int:orgID>/', views.orgDetail, name="orgdetail"),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

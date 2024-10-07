@@ -49,7 +49,35 @@ class FosterForm(forms.Form):
     fosterEmail = forms.EmailField(widget=forms.TextInput,label="Email")
     fosterPhone = forms.CharField(widget=forms.TextInput, label="Phone Number")
     
-
+class PetFormAuto(forms.ModelForm):
+    class Meta:
+        model = Pet
+        fields = ['petMicrochipID', 'petName', 'petType', 'petSex', 'petDOB', 'petSpayNeuter', 'petStatus', 
+                  'petImage', 'petRecords', 'petBio', 'petFoster', 'petOrganization']
         
+        widgets = {
+            'petDOB': forms.SelectDateWidget,
+            'petBio': forms.Textarea(attrs={'rows': 4}),
+            'petImage': forms.FileInput,
+            'petRecords': forms.FileInput,
+            }
         
+class OrgFormAuto(forms.ModelForm):
+    class Meta:
+        model = Organization
+        fields = ['orgID','orgName','orgContact','orgStreet','orgCity','orgState','orgZip','orgEmail','orgPhone']
+        widgets = {
+            'orgState': forms.Select(choices=stateSelection),
+            'orgZip': forms.NumberInput(attrs={'max':99999}),
+            'orgEmail': forms.EmailInput,
+                }
     
+class FosterFormAuto(forms.ModelForm):
+    class Meta:
+        model = Foster
+        fields = ['fosterID','fosterName','fosterStreet','fosterCity','fosterState','fosterZip','fosterEmail','fosterPhone']
+        widgets = { 
+            'fosterState': forms.Select(choices=stateSelection),
+            'fosterZip': forms.NumberInput(attrs={'max':99999}),
+            'fosterEmail':forms.EmailInput,  
+                   }

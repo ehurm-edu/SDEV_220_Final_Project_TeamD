@@ -1,8 +1,6 @@
 from django.db import models
 
 
-
-
 typeSelection = [('cat','Cat'), ('dog', 'Dog'), ('other','Other')]
 sexSelection = [('female','Female'), ('male', 'Male'), ('unknown','Unknown')]
 fixSelection = [('no','No'), ('yes', 'Yes'), ('unknown','Unknown')]
@@ -38,7 +36,7 @@ class Foster(models.Model):
     fosterState = models.CharField(choices=stateSelection, max_length=2)
     fosterZip = models.CharField(max_length=5)
     fosterEmail = models.EmailField(max_length=70)
-    orgPhone = models.CharField(max_length=10, null=True)
+    fosterPhone = models.CharField(max_length=10, null=True)
     
     def __str__(self):
         return self.fosterName

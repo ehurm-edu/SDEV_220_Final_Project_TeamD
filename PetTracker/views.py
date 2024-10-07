@@ -1,23 +1,39 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from PetTracker.forms import PetForm, OrgForm, FosterForm
+from .models import Pet, Foster, Organization
 
 # Create your views here.
-
 
 def index(request):
     return render(request, 'index.html')
 
+
 def viewPet(request):
-    return render(request, 'viewpets.html')
+    pets = Pet.objects.all()
+    return render(request, 'viewpets.html', {'pets':pets})
 
-def petSubmit(request):
-    return render(request, 'petsubmit.html')
+def petDetail(request, petID):
+    pet = get_object_or_404(Pet, pk=petID)
+    return render(request, 'petdetail.html', {'pet':pet})
 
-def orgSubmit(request):
-    return render(request, 'orgsubmit.html')
+def viewFoster(request):
+    fosters = Foster.objects.all()
+    return render(request, 'viewfosters.html', {'fosters':fosters})
 
-def fosterSubmit(request):
-    return render(request, 'fostersubmit.html')
+def fosterDetail(request, fosterID):
+    foster = get_object_or_404(Foster, pk=fosterID)
+    return render(request, 'fosterdetail.html', {'foster':foster})
+
+def viewOrg(request):
+    organizations = Organization.objects.all()
+    return render(request, 'vieworgs.html', {'organizations':organizations})
+
+def orgDetail(request, orgID):
+    org = get_object_or_404(Organization, pk=orgID)
+    return render(request, 'orgdetail.html', {'org':org})
+
+
+
 
 def addPet(request):
     if request.method == 'POST':
