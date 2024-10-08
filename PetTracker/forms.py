@@ -1,5 +1,5 @@
 from django import forms
-from PetTracker.models import *
+from PetTracker.models import Pet, Foster, Organization
 
 
 #This entire thing might be unncessary
@@ -49,36 +49,7 @@ class FosterForm(forms.Form):
     fosterEmail = forms.EmailField(widget=forms.TextInput,label="Email")
     fosterPhone = forms.CharField(widget=forms.TextInput, label="Phone Number")
 '''
-
-
-class ImagesForm(forms.ModelForm):
-    # pic = forms.FileField(widget = forms.TextInput(attrs={
-    #         "name": "images",
-    #         "type": "File",
-    #         "class": "form-control",
-    #         "multiple": "True",
-    #     }), label = "")
-    class Meta:
-        model = Image_Upload
-        fields = ['pic']
-        widgets = {
-            'pic': forms.ClearableFileInput(),
-        }
-        
-class FilesForm(forms.ModelForm):
-    # record = forms.FileField(widget = forms.TextInput(attrs={
-    #         "name": "records",
-    #         "type": "File",
-    #         "class": "form-control",
-    #         "multiple": "True",
-    #     }), label = "")
-    class Meta:
-        model = File_Upload
-        fields = ['record']
-        widgets = {
-            'record': forms.ClearableFileInput(),
-        }
-
+    
 class PetForm(forms.ModelForm):
     class Meta:
         model = Pet
@@ -88,8 +59,8 @@ class PetForm(forms.ModelForm):
         widgets = {
             'petDOB': forms.SelectDateWidget,
             'petBio': forms.Textarea(attrs={'rows': 4}),
-            'petImage': forms.FileInput(),
-            'petRecords': forms.FileInput(),
+            'petImage': forms.FileInput,
+            'petRecords': forms.FileInput,
             }
         
 class OrgForm(forms.ModelForm):

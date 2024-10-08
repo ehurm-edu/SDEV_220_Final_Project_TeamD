@@ -2,25 +2,13 @@
 
 {% block content %}
 <head>
-    <title>Pets</title>
+    <title>Organizations</title>
 </head>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Contact Person</th>
-        <th>Contact Phone</th>
-        <th>Contact e-mail</th>
-    </tr>
+<uL>
 {% for organization in organizations %}
-    <tbody>
-        <td>{{organization.orgID}}</td>
-        <td><a href="{% url 'orgdetail' organization.orgID %}"> {{organization.orgName}}</a></td>
-        <td>{{organization.orgContact}}</td>
-        <td>{{organization.orgPhone}}</td>
-        <td>{{organization.orgEmail}}</td>
-    </tbody>       
+    <li>
+        <a href="{% url 'orgdetail' organization.orgID %}"> {{organization.orgName}}</a>
+    </li>        
 {% endfor %}
-</table>
+</uL>
 {% endblock %}
-
