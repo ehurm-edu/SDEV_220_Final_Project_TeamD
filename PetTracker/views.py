@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from PetTracker.forms import PetForm, OrgForm, FosterForm
-from .models import Pet, Foster, Organization
+from PetTracker.forms import PetForm, OrgForm, FosterForm, ImagesForm, FilesForm
+from .models import Pet, Foster, Organization, File_Upload, Image_Upload
 
 # Create your views here.
 
@@ -37,13 +37,28 @@ def orgDetail(request, orgID):
 
 def addPet(request):
     form = PetForm()
+    file_form = FilesForm()
+    image_form = ImagesForm()
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
-        if form.is_valid():
+        file_form = FilesForm(request.POST, request.FILES)
+        records = request.FILES.getlist('record')
+        image_form = ImagesForm(request.POST, request.FILES)
+        pics = request.FILES.getlist('pic')
+        
+        if form.is_valid() and file_form.is_valid() and image_form.is_valid():
             form.save()  # Save the pet form data to the database
+            for r in records:
+                record_instance = File_Upload(record=r)
+                record_instance.save()
+            for p in pics:
+                image_instance = Image_Upload(pic=p)
+                image_instance.save()
             return redirect('petsubmit')
         else:
             form = PetForm()
+            file_form = FilesForm()
+            image_form = ImagesForm()
     context = {'petFormKey': form}
     return render(request, 'addpet.html', context)
 

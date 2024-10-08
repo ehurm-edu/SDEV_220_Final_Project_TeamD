@@ -14,6 +14,12 @@ stateSelection = [('al', 'AL'), ('ak', 'AK'), ('az', 'AZ'), ('ar', 'AR'), ('ca',
     
     # Create your models here.
 
+class Image_Upload(models.Model):
+    pic = models.ImageField(blank=True, null=True)
+
+class File_Upload(models.Model):
+    record = models.FileField(blank=True, null=True)
+
 class Organization(models.Model):
     orgID = models.AutoField(primary_key=True)
     orgName = models.CharField(max_length=50)
@@ -50,12 +56,11 @@ class Pet(models.Model):
     petDOB = models.DateField(blank=True, null=True)
     petSpayNeuter = models.CharField(choices=fixSelection, max_length=10)
     petStatus = models.CharField(choices=statusSelection, max_length=15)
-    petImage = models.FileField(blank=True, null=True)
-    petRecords = models.FileField(blank=True, null=True)
+    petImage = models.ForeignKey(Image_Upload, on_delete=models.CASCADE, blank=True, null=True)
+    petRecords = models.ForeignKey(File_Upload, on_delete=models.CASCADE, blank=True, null=True)
     petBio=models.TextField(max_length=5000, blank=True, null=True)
     petOrganization=models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, null=True)
     petFoster=models.ForeignKey(Foster, on_delete=models.CASCADE, blank=True, null=True)
     
     def __str__(self):
         return f"{self.petName} - {self.petSex} - DOB: {self.petDOB}"
-    

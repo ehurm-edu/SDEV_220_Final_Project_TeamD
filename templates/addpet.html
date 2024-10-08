@@ -4,96 +4,53 @@
 </head>
     <title>Add Pet</title>
 </head>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
         <tr>
-            <td>
-                Pet Name
-            </td>
-            <td>
-                {{ petFormKey.petName }}
-            </td>                
+            <td>Pet Name: </td>
+            <td>{{ petFormKey.petName }}</td>                
         </tr>
         <tr>
-            <td>
-                Pet Type
-            </td>
-            <td>
-                {{ petFormKey.petType }}
-            </td>
+            <td>Pet Type</td>
+            <td>{{ petFormKey.petType }}</td>
         </tr>
         <tr>
-            <td>
-                Sex
-            </td>
-            <td>
-                {{ petFormKey.petSex }}
+            <td>Sex</td>
+            <td>{{ petFormKey.petSex }}</td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td>{{ petFormKey.petDOB }}</td>
+        </tr>
+        <tr>
+            <td>Spayed or neutered</td>
+            <td>{{ petFormKey.petSpayNeuter }}
             </td>
         </tr>
         <tr>
-            <td>
-                Date of Birth
-            </td>
-            <td>
-                {{ petFormKey.petDOB }}
-            </td>
+            <td>Adoption Status</td>
+            <td>{{ petFormKey.petStatus }}</td>
         </tr>
         <tr>
-            <td>
-                Spayed or neutered
-            </td>
-            <td>
-                {{ petFormKey.petSpayNeuter }}
-            </td>
+            <td>Upload an image</td>
+            <td>{{ petFormKey.petImage }}</td>
         </tr>
         <tr>
-            <td>
-                Adoption Status
-            </td>
-            <td>
-                {{ petFormKey.petStatus }}
-            </td>
+            <td>Upload vet records</td>
+            <td>{{ petFormKey.petRecords }}</td>
         </tr>
         <tr>
-            <td>
-                Upload an image
-            </td>
-            <td>
-                {{ petFormKey.petImage }}
-            </td>
+            <td>Write a Bio</td>
+            <td>{{ petFormKey.petBio }}</td>
         </tr>
         <tr>
-            <td>
-                Upload vet records
-            </td>
-            <td>
-                {{ petFormKey.petRecords }}
-            </td>
+            <td>Independent foster</td>
+            <td>{{ petFormKey.petFoster }}</td>
         </tr>
         <tr>
-            <td>
-                Write a Bio
-            </td>
-            <td>
-                {{ petFormKey.petBio }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Independent foster
-            </td>
-            <td>
-                {{ petFormKey.petFoster }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Foster organization
-            </td>
-            <td>
-                {{ petFormKey.petOrganization }}
-            </td>
+            <td>Foster organization</td>
+            <td>{{ petFormKey.petOrganization }}</td>
         </tr>     
     </table>
     <button type="submit">Submit</button>

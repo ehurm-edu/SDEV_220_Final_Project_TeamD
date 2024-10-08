@@ -21,10 +21,17 @@
     {% endif %}
 
     {% if pet.petImage %}
-    <img src="{{ pet.petImage.url }}" width="400" height="400"><br><br>
+    <img src="{{ pet.petImage.url }}" width="400"><br><br>
     {% else %}
     No image available<br>
     {% endif %}
+
+    {% if pet.petRecords %}
+    [pet record placeholder]
+    {% else %}
+    No records available<br>
+    {% endif %}
+
 
     Bio:<br> {{pet.petBio}}<br><br>
 
