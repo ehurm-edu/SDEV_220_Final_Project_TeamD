@@ -5,6 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'pettracker.css' %}">
+<style>
+    .logout-button {
+        background: none;
+        border: none;
+        color: blue; 
+        cursor: pointer;
+        padding: 0;
+        font-size: inherit; 
+        text-decoration: underline;
+    }
+
+    .logout-button:hover {
+        color: darkblue; /
+    }
+</style>
+    
 </head>
     <body>
         </header>
@@ -41,6 +57,17 @@
                             {% if request.user.is_authenticated %}
                             <td>
                             <a href="{% url 'addorg' %}">Add an organization</a>
+                            </td>    
+                            {% endif %}
+                            <td>
+                            {% if request.user.is_authenticated %}
+
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="logout-button">Logout</button>
+                            </form>
+                            {% else %}
+                            <a href="{% url 'login' %}">Log in</a>
                             </td>    
                             {% endif %}
   
