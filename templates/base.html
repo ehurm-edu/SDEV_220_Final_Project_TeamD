@@ -65,7 +65,7 @@
                             </td>
                             {% elif request.user.is_authenticated and request.user|in_group:'superadmins' %}
                             <td>
-                            <a href="{% url 'addfoster' %}">Add a foster</a>
+                            <a href="{% url 'addorg' %}">Add a organization</a>
                             </td>
                             {% endif %}
                             
