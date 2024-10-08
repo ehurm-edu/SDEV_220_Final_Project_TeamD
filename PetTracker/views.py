@@ -72,3 +72,11 @@ def addFoster(request):
     context = {'fosterFormKey' : form}
     return render(request, 'addfoster.html', context)
 
+def petsubmit(request):
+    return render(request, 'petsubmit.html')
+
+def orgsubmit(request):
+    return render(request, 'orgsubmit.html')
+
+def fostersubmit(request):
+    return render(request, 'fostersubmit.html')

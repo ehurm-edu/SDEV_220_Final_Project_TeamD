@@ -4,11 +4,30 @@
 <head>
     <title>Pets</title>
 </head>
-<uL>
-{% for pet in pets %}
-    <li>
-        <a href="{% url 'petdetail' pet.petID %}"> {{pet.petName}}, {{pet.petType}} </a>
-    </li>        
-{% endfor %}
-</uL>
+<table>
+    <thead>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Type</td>
+        <td>Sex</td>
+        <td>DOB</td>
+        <td>Fixed</td>
+        <td>Status</td>
+        <td>Organization</td>
+        <td>Foster</td>
+    </thead>
+    {% for pet in pets %}
+        <tr>
+            <td>{{ pet.petID }}</td>
+            <td><a href="{% url 'petdetail' pet.petID %}"> {{pet.petName}}</a></td>
+            <td>{{ pet.petType }}</td>
+            <td>{{ pet.petSex }}</td>
+            <td>{{ pet.petDOB }}</td>
+            <td>{{ pet.petSpayNeuter }}</td>
+            <td>{{ pet.petStatus }}</td>
+            <td>{{ pet.petOrganization }}</td>
+            <td>{{ pet.petFoster }}</td>
+        </tr>
+    {% endfor %}
+</table>
 {% endblock %}

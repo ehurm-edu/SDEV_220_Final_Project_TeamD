@@ -82,3 +82,4 @@ class FosterForm(forms.ModelForm):
             'fosterZip': forms.NumberInput(attrs={'max':99999}),
             'fosterEmail':forms.EmailInput,  
                    }
+        

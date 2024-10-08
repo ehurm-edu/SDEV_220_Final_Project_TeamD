@@ -8,12 +8,36 @@
     {% csrf_token %}
     <table>
         <tr>
-            <td>
-                
-            </td>
-            <td>
-
-            </td>                
+            <td>Organization Name:</td>
+            <td>{{ orgFormKey.orgName }}</td>                
+        </tr>
+        <tr>
+            <td>Organization Address:</td>
+            <td>{{ orgFormKey.orgStreet }}</td>                
+        </tr>
+        <tr>
+            <td>City:</td>
+            <td>{{ orgFormKey.orgCity }}</td>         
+        </tr>
+        <tr>
+            <td>State:</td>
+            <td>{{ orgFormKey.orgState }}</td>         
+        </tr>
+        <tr>
+            <td>ZIP:</td>
+            <td>{{ orgFormKey.orgZip }}</td>         
+        </tr>
+        <tr>
+            <td>Contact Person:</td>
+            <td>{{ orgFormKey.orgContact }}</td>                
+        </tr>
+        <tr>
+            <td>Contact Email:</td>
+            <td>{{ orgFormKey.orgEmail }}</td>                
+        </tr>
+        <tr>
+            <td>Contact Phone:</td>
+            <td>{{ orgFormKey.orgPhone }}</td>                
         </tr>
     </table>
     <button type="submit">Submit</button>
