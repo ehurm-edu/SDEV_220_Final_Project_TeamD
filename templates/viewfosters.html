@@ -14,7 +14,7 @@
 {% for foster in fosters %}
     <tbody>
         <td>{{foster.fosterID}}</td>
-        <td><a href="{% url 'fosterdetail' organization.orgID %}"> {{foster.fosterName}}</a></td>
+        <td><a href="{% url 'fosterdetail' foster.fosterID %}"> {{foster.fosterName}}</a></td>
         <td>{{foster.fosterEmail}}</td>
         <td>{{foster.fosterPhone}}</td>
     </tbody>       
