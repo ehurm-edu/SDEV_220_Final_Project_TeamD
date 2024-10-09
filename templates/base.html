@@ -31,10 +31,10 @@
                         <td>
                             <a href="{% url 'index' %}">Home</a>
                         </td>
-                        
+
                             {% if request.user.is_authenticated %}
                                 <td>
-                                <a href="{% url 'viewpets' %}">Our Pets</a>
+                                    <a href="{% url 'viewpets' %}">Our Pets</a>
                                 </td> 
                                 <td>
                                     <a href="{% url 'viewfoster' %}">Fosters</a>
@@ -45,25 +45,25 @@
 
                                     {% if request.user|in_group:'admins' or request.user|in_group:'superadmins' %}
                                     <td>
-                                        <a href="{% url 'addpet' %}">Add a pet</a>
+                                        <a href="{% url 'addpet' %}">Add a Pet</a>
                                     </td>
                                     <td>
-                                        <a href="{% url 'addfoster' %}">Add a foster</a>
+                                        <a href="{% url 'addfoster' %}">Add a Foster</a>
                                     </td>
                                     <td>
-                                        <a href="{% url 'addorg' %}">Add an organization</a>
+                                        <a href="{% url 'addorg' %}">Add an Organization</a>
                                     </td>
                                     {% endif %}
 
                                 <td>
                                     <form method="post" action="{% url 'logout' %}">
                                         {% csrf_token %}
-                                        <button type="submit" class="logout-button">Logout</button>
+                                        <button type="submit" class="logout-button">Log Out</button>
                                     </form>
                                 </td>
                             {% else %}
                                 <td>
-                                <a href="{% url 'login' %}">Log in</a>
+                                    <a href="{% url 'login' %}">Log In</a>
                                 </td>       
                             {% endif %}
                             

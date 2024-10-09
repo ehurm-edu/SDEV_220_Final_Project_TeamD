@@ -13,21 +13,21 @@
     Status: {{ pet.petStatus}}<br>
     
     {% if pet.petOrganization %}
-    Organization: {{pet.petOrganization}}<br>
+        Organization: <a href="{% url 'orgdetail' pet.petOrganization.orgID %}">{{pet.petOrganization}}</a><br>
     {% endif %}
 
     {% if pet.petFoster %}
-    Foster: {{pet.petFoster}}<br>
+        Foster: <a href="{% url 'fosterdetail' pet.petFoster.fosterID %}">{{pet.petFoster}}</a><br>
     {% endif %}
 
     {% if pet.petImage %}
-    <img src="{{ pet.petImage.url }}" width="400" height="400"><br><br>
+    <img src="{{ pet.petImage.url }}" width="400"><br><br>
     {% else %}
     No image available<br>
     {% endif %}
 
     Bio:<br> {{pet.petBio}}<br><br>
 
-    <a href="/viewpets">Back</a>
+    <a href="/viewpets">See All Pets</a>
 </body>
 {% endblock %}

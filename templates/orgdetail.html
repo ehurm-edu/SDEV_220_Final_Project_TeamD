@@ -4,5 +4,24 @@
 <head>
     <title>{{ org.orgName }}'s profile</title>
 </head>
-<p>Name: {{ org.orgName }}</p>
+
+Name: {{ org.orgName }}<br>
+Address: {{ org.orgStreet }}, {{ org.orgCity }}, {{ org.orgState.upper }} {{ org.orgZip }}<br>
+Contact Person: {{ org.orgContact }}<br>
+E-mail: {{ org.orgEmail }}<br>
+Phone: {{ org.orgPhone }}<br>
+<br>
+
+{% if current.count > 0 %}
+    Current pets:<br>
+    {% for c in current %}
+    <a href="{% url 'petdetail' c.petID %}">{{c.petName}}</a><br>
+    {% endfor %}
+{% else %}
+No current pets.<br>
+{% endif %}
+
+
+<br><br>
+<a href="/vieworgs">See All Organizations</a>
 {% endblock %}

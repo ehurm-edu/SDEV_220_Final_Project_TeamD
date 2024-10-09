@@ -17,12 +17,13 @@ def petDetail(request, petID):
     return render(request, 'petdetail.html', {'pet':pet})
 
 def viewFoster(request):
-    fosters = Foster.objects.all()
+    fosters = Foster.objects.all()   
     return render(request, 'viewfosters.html', {'fosters':fosters})
 
 def fosterDetail(request, fosterID):
     foster = get_object_or_404(Foster, pk=fosterID)
-    return render(request, 'fosterdetail.html', {'foster':foster})
+    fostering = Pet.objects.filter(petFoster=fosterID)
+    return render(request, 'fosterdetail.html', {'foster':foster, 'fostering':fostering,})
 
 def viewOrg(request):
     organizations = Organization.objects.all()
@@ -30,7 +31,8 @@ def viewOrg(request):
 
 def orgDetail(request, orgID):
     org = get_object_or_404(Organization, pk=orgID)
-    return render(request, 'orgdetail.html', {'org':org})
+    current = Pet.objects.filter(petOrganization=orgID)
+    return render(request, 'orgdetail.html', {'org':org, 'current':current})
 
 
 

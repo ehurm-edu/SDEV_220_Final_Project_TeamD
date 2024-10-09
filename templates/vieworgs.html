@@ -6,7 +6,6 @@
 </head>
 <table>
     <tr>
-        <th>ID</th>
         <th>Name</th>
         <th>Contact Person</th>
         <th>Contact Phone</th>
@@ -14,7 +13,6 @@
     </tr>
 {% for organization in organizations %}
     <tbody>
-        <td>{{organization.orgID}}</td>
         <td><a href="{% url 'orgdetail' organization.orgID %}"> {{organization.orgName}}</a></td>
         <td>{{organization.orgContact}}</td>
         <td>{{organization.orgPhone}}</td>

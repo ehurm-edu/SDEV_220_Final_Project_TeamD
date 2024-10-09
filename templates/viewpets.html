@@ -6,7 +6,6 @@
 </head>
 <table>
     <tr>
-        <th>ID</th>
         <th>Name</th>
         <th>Type</th>
         <th>Sex</th>
@@ -18,15 +17,26 @@
     </tr>
     {% for pet in pets %}
         <tr>
-            <td>{{ pet.petID }}</td>
             <td><a href="{% url 'petdetail' pet.petID %}"> {{pet.petName}}</a></td>
             <td>{{ pet.petType }}</td>
             <td>{{ pet.petSex }}</td>
             <td>{{ pet.petDOB }}</td>
             <td>{{ pet.petSpayNeuter }}</td>
             <td>{{ pet.petStatus }}</td>
-            <td>{{ pet.petOrganization }}</td>
-            <td>{{ pet.petFoster }}</td>
+            <td>
+                {% if pet.petOrganization %}
+                    <a href="{% url 'orgdetail' pet.petOrganization.orgID %}">{{ pet.petOrganization }}</a>
+                {% else %}
+                    {{ pet.petOrganization }}
+                {% endif %}
+            </td>
+            <td>
+                {% if pet.petFoster %}
+                <a href="{% url 'fosterdetail' pet.petFoster.fosterID %}">{{ pet.petFoster }}</a>
+                {% else %}
+                    {{ pet.petFoster }}
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
 </table>

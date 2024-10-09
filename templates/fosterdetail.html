@@ -5,7 +5,22 @@
     <title>{{ foster.fosterName }}'s profile</title>
 </head>
 
-Name: {{ foster.fosterName }}
+Name: {{ foster.fosterName }}<br>
+Address: {{ foster.fosterStreet }}, {{ foster.fosterCity }}, {{ foster.fosterState.upper }} {{ foster.fosterZip }}<br>
+E-mail: {{ foster.fosterEmail }}<br>
+Phone: {{ foster.fosterPhone }}<br>
+<br>
 
-<a href="/viewfosters">Back</a>
+
+{% if fostering.count > 0 %}
+    Currently fostering:<br>
+    {% for f in fostering %}
+    <a href="{% url 'petdetail' f.petID %}">{{f.petName}}</a><br>
+    {% endfor %}
+{% else %}
+No current fosters.<br>
+{% endif %}
+
+<br><br>
+<a href="/viewfosters">See All Fosters</a>
 {% endblock %}

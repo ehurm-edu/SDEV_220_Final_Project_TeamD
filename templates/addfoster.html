@@ -8,12 +8,32 @@
     {% csrf_token %}
     <table>
         <tr>
-            <td>
-                
-            </td>
-            <td>
-
-            </td>                
+            <td>Name:</td>
+            <td>{{ fosterFormKey.fosterName }}</td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td>{{ fosterFormKey.fosterStreet }}</td>
+        </tr>
+        <tr>
+            <td>City:</td>
+            <td>{{ fosterFormKey.fosterCity }}</td>
+        </tr>
+        <tr>
+            <td>State:</td>
+            <td>{{ fosterFormKey.fosterState }}</td>
+        </tr>
+        <tr>
+            <td>ZIP:</td>
+            <td>{{ fosterFormKey.fosterZip }}</td>
+        </tr>
+        <tr>
+            <td>E-mail:</td>
+            <td>{{ fosterFormKey.fosterEmail }}</td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td>{{ fosterFormKey.fosterPhone }}</td>
         </tr>
     </table>
     <button type="submit">Submit</button>
