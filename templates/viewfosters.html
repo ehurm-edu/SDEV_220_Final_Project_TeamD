@@ -4,11 +4,20 @@
 <head>
     <title>Fosters</title>
 </head>
-<ul>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>e-mail</th>
+        <th>Phone</th>
+    </tr>
 {% for foster in fosters %}
-    <li>
-        <a href="{% url 'fosterdetail' foster.fosterID %}"> {{foster.fosterName}}</a>
-    </li>        
+    <tbody>
+        <td>{{foster.fosterID}}</td>
+        <td><a href="{% url 'fosterdetail' organization.orgID %}"> {{foster.fosterName}}</a></td>
+        <td>{{foster.fosterEmail}}</td>
+        <td>{{foster.fosterPhone}}</td>
+    </tbody>       
 {% endfor %}
-</ul>
+</table>
 {% endblock %}

@@ -31,40 +31,42 @@
                         <td>
                             <a href="{% url 'index' %}">Home</a>
                         </td>
+                        
                             {% if request.user.is_authenticated %}
-                            <td>
-                            <a href="{% url 'viewpets' %}">Our Pets</a>
-                            </td> 
-                            <td>
-                                <a href="{% url 'viewfoster' %}">Fosters</a>
-                            </td>
-                            <td>
-                                <a href="{% url 'vieworg' %}">Organizations</a>
-                            </td>
+                                <td>
+                                <a href="{% url 'viewpets' %}">Our Pets</a>
+                                </td> 
+                                <td>
+                                    <a href="{% url 'viewfoster' %}">Fosters</a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'vieworg' %}">Organizations</a>
+                                </td>
 
-                                {% if request.user|in_group:'admins' or request.user|in_group:'superadmins' %}
-                                <td>
-                                    <a href="{% url 'addpet' %}">Add a pet</a>
-                                </td>
-                                <td>
-                                    <a href="{% url 'addfoster' %}">Add a foster</a>
-                                </td>
-                                <td>
-                                    <a href="{% url 'addorg' %}">Add an organization</a>
-                                </td>
-                                {% endif %}
+                                    {% if request.user|in_group:'admins' or request.user|in_group:'superadmins' %}
+                                    <td>
+                                        <a href="{% url 'addpet' %}">Add a pet</a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'addfoster' %}">Add a foster</a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'addorg' %}">Add an organization</a>
+                                    </td>
+                                    {% endif %}
 
-                            <td>
-                            <form method="post" action="{% url 'logout' %}">
-                                {% csrf_token %}
-                                <button type="submit" class="logout-button">Logout</button>
-                            </form>
+                                <td>
+                                    <form method="post" action="{% url 'logout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="logout-button">Logout</button>
+                                    </form>
+                                </td>
                             {% else %}
-                            <td>
+                                <td>
                                 <a href="{% url 'login' %}">Log in</a>
-                            </td>    
+                                </td>       
                             {% endif %}
-  
+                            
                     </tr>
                 </table>
             </div>
