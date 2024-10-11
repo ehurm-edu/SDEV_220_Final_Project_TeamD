@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<head>
-    <title>Confirmation</title>
-</head>
-<p>Organization added.</p>
-<a href="/addorg">Add another organization</a>
-<a href="/vieworgs">View all organizations</a>
+<title>Thanks</title>
+<h1>Confirmation</h1>
 
+<div class="confirmation-container">
+    <p>Organization added successfully.</p>
+
+    <div class="confirmation-links">
+        <a href="/addorg" class="btn-link">Add another organization</a>
+        <a href="/vieworgs" class="btn-link">View all organizations</a>
+    </div>
+</div>
 {% endblock %}

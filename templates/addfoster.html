@@ -1,41 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-</head>
-    <title>Add Foster</title>
-</head>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-        <tr>
-            <td>Name:</td>
-            <td>{{ fosterFormKey.fosterName }}</td>
-        </tr>
-        <tr>
-            <td>Address:</td>
-            <td>{{ fosterFormKey.fosterStreet }}</td>
-        </tr>
-        <tr>
-            <td>City:</td>
-            <td>{{ fosterFormKey.fosterCity }}</td>
-        </tr>
-        <tr>
-            <td>State:</td>
-            <td>{{ fosterFormKey.fosterState }}</td>
-        </tr>
-        <tr>
-            <td>ZIP:</td>
-            <td>{{ fosterFormKey.fosterZip }}</td>
-        </tr>
-        <tr>
-            <td>E-mail:</td>
-            <td>{{ fosterFormKey.fosterEmail }}</td>
-        </tr>
-        <tr>
-            <td>Phone:</td>
-            <td>{{ fosterFormKey.fosterPhone }}</td>
-        </tr>
-    </table>
-    <button type="submit">Submit</button>
-</form>
+<title>Add a Foster</title>
+<h1>Add a Foster</h1>
+
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_fosterName">Foster Name</label>
+            {{ fosterFormKey.fosterName }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_fosterStreet">Street</label>
+            {{ fosterFormKey.fosterStreet }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_fosterCity">City</label>
+            {{ fosterFormKey.fosterCity }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_fosterState">State</label>
+            {{ fosterFormKey.fosterState }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_fosterZip">Zip Code</label>
+            {{ fosterFormKey.fosterZip }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_fosterEmail">Email</label>
+            {{ fosterFormKey.fosterEmail }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_fosterPhone">Phone</label>
+            {{ fosterFormKey.fosterPhone }}
+        </div>
+
+        <button type="submit" class="btn-submit">Submit</button>
+    </form>
+</div>
 {% endblock %}

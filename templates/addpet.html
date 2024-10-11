@@ -1,58 +1,69 @@
 {% extends 'base.html' %}
 
 {% block content %}
-</head>
-<title>Add Pet</title>
-</head>
-<form method="POST" enctype="multipart/form-data">
-{% csrf_token %}
-<table>
-    <tr>
-        <td>Pet Name: </td>
-        <td>{{ petFormKey.petName }}</td>                
-    </tr>
-    <tr>
-        <td>Pet Type</td>
-        <td>{{ petFormKey.petType }}</td>
-    </tr>
-    <tr>
-        <td>Sex</td>
-        <td>{{ petFormKey.petSex }}</td>
-    </tr>
-    <tr>
-        <td>Date of Birth</td>
-        <td>{{ petFormKey.petDOB }}</td>
-    </tr>
-    <tr>
-        <td>Spayed or neutered</td>
-        <td>{{ petFormKey.petSpayNeuter }}
-        </td>
-    </tr>
-    <tr>
-        <td>Adoption Status</td>
-        <td>{{ petFormKey.petStatus }}</td>
-    </tr>
-    <tr>
-        <td>Upload an image</td>
-        <td>{{ petFormKey.petImage }}</td>
-    </tr>
-    <tr>
-        <td>Upload vet records</td>
-        <td>{{ petFormKey.petRecords }}</td>
-    </tr>
-    <tr>
-        <td>Write a Bio</td>
-        <td>{{ petFormKey.petBio }}</td>
-    </tr>
-    <tr>
-        <td>Independent foster</td>
-        <td>{{ petFormKey.petFoster }}</td>
-    </tr>
-    <tr>
-        <td>Foster organization</td>
-        <td>{{ petFormKey.petOrganization }}</td>
-    </tr>     
-</table>
-<button type="submit">Submit</button>
-</form>
+<title>Add a Pet</title>
+<h1>Add a Pet</h1>
+
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_petName">Name</label>
+            {{ petFormKey.petName }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_petType">Type</label>
+            {{ petFormKey.petType }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_petSex">Sex</label>
+            {{ petFormKey.petSex }}
+        </div>
+
+        <div class="form-group form-dob">
+            <label for="id_petDOB">Date of Birth</label>
+            {{ petFormKey.petDOB }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_petSpayNeuter">Spayed/Neutered</label>
+            {{ petFormKey.petSpayNeuter }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_petStatus">Status</label>
+            {{ petFormKey.petStatus }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_petImage">Image</label>
+            {{ petFormKey.petImage }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_petRecords">Records</label>
+            {{ petFormKey.petRecords }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_petBio">Bio</label>
+            {{ petFormKey.petBio }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_petFoster">Foster</label>
+            {{ petFormKey.petFoster }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_petOrganization">Organization</label>
+            {{ petFormKey.petOrganization }}
+        </div>
+
+        <button type="submit" class="btn-submit">Submit</button>
+    </form>
+</div>
 {% endblock %}

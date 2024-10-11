@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<head>
-    <title>Confirmation</title>
-</head>
-<p>Pet added.</p>
-<a href="/addpet">Add another pet</a>
-<a href="/viewpets">View all pets</a>
+<title>Thanks</title>
+<h1>Confirmation</h1>
+
+<div class="confirmation-container">
+    <p>Pet added successfully.</p>
+
+    <div class="confirmation-links">
+        <a href="/addpet" class="btn-link">Add another pet</a>
+        <a href="/viewpets" class="btn-link">View all pets</a>
+    </div>
+</div>
 {% endblock %}

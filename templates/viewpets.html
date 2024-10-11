@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<head>
-    <title>Pets</title>
-</head>
+<title>Our Pets</title>
+<h1>Our Pets</h1>
 <table>
     <tr>
+        <th>Image</th>
         <th>Name</th>
         <th>Type</th>
         <th>Sex</th>
@@ -17,7 +17,14 @@
     </tr>
     {% for pet in pets %}
         <tr>
-            <td><a href="{% url 'petdetail' pet.petID %}"> {{pet.petName}}</a></td>
+            <td>
+                {% if pet.petImage %}
+                    <img src="{{ pet.petImage.url }}" class="thumbnail">
+                {% else %}
+                    No image
+                {% endif %}
+            </td>
+            <td><a href="{% url 'petdetail' pet.petID %}">{{ pet.petName }}</a></td>
             <td>{{ pet.petType }}</td>
             <td>{{ pet.petSex }}</td>
             <td>{{ pet.petDOB }}</td>

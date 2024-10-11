@@ -1,33 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<head>
-    <title>{{ pet.petName }}'s profile</title>
-</head>
-<body>
-    Name: {{ pet.petName }}<br>
-    Type: {{ pet.petType }}<br>
-    Sex: {{ pet.petSex}}<br>
-    DOB: {{ pet.petDOB }}<br>
-    Spayed or Neutered: {{ pet.petSpayNeuter}}<br>
-    Status: {{ pet.petStatus}}<br>
-    
-    {% if pet.petOrganization %}
-        Organization: <a href="{% url 'orgdetail' pet.petOrganization.orgID %}">{{pet.petOrganization}}</a><br>
-    {% endif %}
+<title>{{ pet.petName }}'s Profile</title>
+<h1>{{ pet.petName }}'s Profile</h1>
 
-    {% if pet.petFoster %}
-        Foster: <a href="{% url 'fosterdetail' pet.petFoster.fosterID %}">{{pet.petFoster}}</a><br>
-    {% endif %}
+<div class="pet-details-container">
+    <div class="pet-image">
+        {% if pet.petImage %}
+            <img src="{{ pet.petImage.url }}" alt="Image of {{ pet.petName }}">
+        {% else %}
+            <p>No image available</p>
+        {% endif %}
+    </div>
 
-    {% if pet.petImage %}
-    <img src="{{ pet.petImage.url }}" width="400"><br><br>
-    {% else %}
-    No image available<br>
-    {% endif %}
+    <div class="pet-info">
+        <p><strong>Name:</strong> {{ pet.petName }}</p>
+        <p><strong>Type:</strong> {{ pet.petType }}</p>
+        <p><strong>Sex:</strong> {{ pet.petSex }}</p>
+        <p><strong>DOB:</strong> {{ pet.petDOB }}</p>
+        <p><strong>Spayed/Neutered:</strong> {{ pet.petSpayNeuter }}</p>
+        <p><strong>Status:</strong> {{ pet.petStatus }}</p>
 
-    Bio:<br> {{pet.petBio}}<br><br>
+        {% if pet.petOrganization %}
+            <p><strong>Organization:</strong> <a href="{% url 'orgdetail' pet.petOrganization.orgID %}">{{ pet.petOrganization }}</a></p>
+        {% endif %}
 
-    <a href="/viewpets">See All Pets</a>
-</body>
+        {% if pet.petFoster %}
+            <p><strong>Foster:</strong> <a href="{% url 'fosterdetail' pet.petFoster.fosterID %}">{{ pet.petFoster }}</a></p>
+        {% endif %}
+
+        <p><strong>Bio:</strong></p>
+        <p>{{ pet.petBio }}</p>
+    </div>
+</div>
+
+<div class="back-link">
+    <a href="{% url 'viewpets' %}">See All Pets</a>
+</div>
 {% endblock %}

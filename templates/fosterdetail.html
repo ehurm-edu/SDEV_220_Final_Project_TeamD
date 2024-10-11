@@ -1,26 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<head>
-    <title>{{ foster.fosterName }}'s profile</title>
-</head>
+<title>{{ foster.fosterName }}'s Profile</title>
+<h1>{{ foster.fosterName }}'s Profile</h1>
 
-Name: {{ foster.fosterName }}<br>
-Address: {{ foster.fosterStreet }}, {{ foster.fosterCity }}, {{ foster.fosterState.upper }} {{ foster.fosterZip }}<br>
-E-mail: {{ foster.fosterEmail }}<br>
-Phone: {{ foster.fosterPhone }}<br>
-<br>
+<div class="foster-details-container">
+    <div class="foster-info">
+        <p><strong>Name:</strong> {{ foster.fosterName }}</p>
+        <p><strong>Street:</strong> {{ foster.fosterStreet }}</p>
+        <p><strong>City:</strong> {{ foster.fosterCity }}</p>
+        <p><strong>State:</strong> {{ foster.fosterState }}</p>
+        <p><strong>Zip Code:</strong> {{ foster.fosterZip }}</p>
+        <p><strong>Email:</strong> <a href="mailto:{{ foster.fosterEmail }}">{{ foster.fosterEmail }}</a></p>
+        <p><strong>Phone:</strong> <a href="tel:{{ foster.fosterPhone }}">{{ foster.fosterPhone }}</a></p>
 
+        <h2>Currently Fostering:</h2>
+        <ul>
+            {% for pet in fostering %}
+                <li><a href="{% url 'petdetail' pet.petID %}">{{ pet.petName }}</a></li>
+            {% empty %}
+                <li>No pets currently being fostered.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 
-{% if fostering.count > 0 %}
-    Currently fostering:<br>
-    {% for f in fostering %}
-    <a href="{% url 'petdetail' f.petID %}">{{f.petName}}</a><br>
-    {% endfor %}
-{% else %}
-No current fosters.<br>
-{% endif %}
-
-<br><br>
-<a href="/viewfosters">See All Fosters</a>
+<div class="back-link">
+    <a href="{% url 'viewfoster' %}">See All Fosters</a>
+</div>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django import forms
 from PetTracker.models import Pet, Foster, Organization
+import datetime
 
   
 class PetForm(forms.ModelForm):
@@ -9,7 +10,7 @@ class PetForm(forms.ModelForm):
                   'petImage', 'petRecords', 'petBio', 'petFoster', 'petOrganization']
         
         widgets = {
-            'petDOB': forms.SelectDateWidget,
+            'petDOB': forms.SelectDateWidget(years=reversed(range(1950, datetime.datetime.now().year +1))),
             'petBio': forms.Textarea(attrs={'rows': 4}),
             'petImage': forms.FileInput,
             'petRecords': forms.FileInput,

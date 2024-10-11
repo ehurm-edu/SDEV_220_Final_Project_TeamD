@@ -1,27 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<head>
-    <title>{{ org.orgName }}'s profile</title>
-</head>
+<title>{{ org.orgName }}'s Profile</title>
+<h1>{{ org.orgName }}'s Profile</h1>
 
-Name: {{ org.orgName }}<br>
-Address: {{ org.orgStreet }}, {{ org.orgCity }}, {{ org.orgState.upper }} {{ org.orgZip }}<br>
-Contact Person: {{ org.orgContact }}<br>
-E-mail: {{ org.orgEmail }}<br>
-Phone: {{ org.orgPhone }}<br>
-<br>
+<div class="org-details-container">
+    <div class="org-info">
+        <p><strong>Name:</strong> {{ org.orgName }}</p>
+        <p><strong>Contact:</strong> {{ org.orgContact }}</p>
+        <p><strong>Street:</strong> {{ org.orgStreet }}</p>
+        <p><strong>City:</strong> {{ org.orgCity }}</p>
+        <p><strong>State:</strong> {{ org.orgState }}</p>
+        <p><strong>Zip Code:</strong> {{ org.orgZip }}</p>
+        <p><strong>Email:</strong> <a href="mailto:{{ org.orgEmail }}">{{ org.orgEmail }}</a></p>
+        <p><strong>Phone:</strong> <a href="tel:{{ org.orgPhone }}">{{ org.orgPhone }}</a></p>
 
-{% if current.count > 0 %}
-    Current pets:<br>
-    {% for c in current %}
-    <a href="{% url 'petdetail' c.petID %}">{{c.petName}}</a><br>
-    {% endfor %}
-{% else %}
-No current pets.<br>
-{% endif %}
+        <h2>Pets in this Organization:</h2>
+        <ul>
+            {% for pet in current %}
+                <li><a href="{% url 'petdetail' pet.petID %}">{{ pet.petName }}</a></li>
+            {% empty %}
+                <li>No pets currently available from this organization.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 
-
-<br><br>
-<a href="/vieworgs">See All Organizations</a>
+<div class="back-link">
+    <a href="{% url 'vieworg' %}">See All Organizations</a>
+</div>
 {% endblock %}

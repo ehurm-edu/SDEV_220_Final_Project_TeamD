@@ -1,83 +1,46 @@
-<!DOCTYPE html>
 {% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'pettracker.css' %}">
-<style>
-    .logout-button {
-        background: none;
-        border: none;
-        color: blue; 
-        cursor: pointer;
-        padding: 0;
-        font-size: inherit; 
-        text-decoration: underline;
-    }
-
-    .logout-button:hover {
-        color: darkblue; /
-    }
-</style>
-    
+    <title>{% block title %}Pet Tracker{% endblock %}</title>
 </head>
 {% load user_tags %}
-    <body>
-        </header>
-            <div class="navheader">
-                <table>
-                    <tr>
-                        <td>
-                            <a href="{% url 'index' %}">Home</a>
-                        </td>
+<body>
+    <header class="navheader">
+        <nav>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'viewpets' %}">Our Pets</a>
 
-                            {% if request.user.is_authenticated %}
-                                <td>
-                                    <a href="{% url 'viewpets' %}">Our Pets</a>
-                                </td> 
-                                <td>
-                                    <a href="{% url 'viewfoster' %}">Fosters</a>
-                                </td>
-                                <td>
-                                    <a href="{% url 'vieworg' %}">Organizations</a>
-                                </td>
+            {% if request.user.is_authenticated %}
 
-                                    {% if request.user|in_group:'admins' or request.user|in_group:'superadmins' %}
-                                    <td>
-                                        <a href="{% url 'addpet' %}">Add a Pet</a>
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'addfoster' %}">Add a Foster</a>
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'addorg' %}">Add an Organization</a>
-                                    </td>
-                                    {% endif %}
+                <a href="{% url 'viewfoster' %}">Fosters</a>
+                <a href="{% url 'vieworg' %}">Organizations</a>
 
-                                <td>
-                                    <form method="post" action="{% url 'logout' %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="logout-button">Log Out</button>
-                                    </form>
-                                </td>
-                            {% else %}
-                                <td>
-                                    <a href="{% url 'login' %}">Log In</a>
-                                </td>       
-                            {% endif %}
-                            
-                    </tr>
-                </table>
-            </div>
-        </header>
-        <main class="container"></main>
-            <div class="row">
-                <div class="col">
+                {% if request.user|in_group:'admins' or request.user|in_group:'superadmins' %}
+                    <a href="{% url 'addpet' %}">Add a Pet</a>
+                    <a href="{% url 'addfoster' %}">Add a Foster</a>
+                    <a href="{% url 'addorg' %}">Add an Organization</a>
+                {% endif %}
+
+                <form method="post" action="{% url 'logout' %}" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit">Log Out</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Log In</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="row">
+            <div class="col">
                 {% block content %}
                 {% endblock %}
-                </div>
             </div>
-        </main>
-    </body>
+        </div>
+    </main>
+</body>
 </html>
