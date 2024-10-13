@@ -3,6 +3,7 @@
 {% block content %}
 <title>Organizations</title>
 <h1>Organizations</h1>
+Click a row in the table to be taken to that organization's profile.
 <table>
     <tr>
         <th>Name</th>
@@ -11,12 +12,12 @@
         <th>Contact e-mail</th>
     </tr>
 {% for organization in organizations %}
-    <tbody>
-        <td><a href="{% url 'orgdetail' organization.orgID %}"> {{organization.orgName}}</a></td>
+    <tr class='clickable' onclick="window.location='{% url 'orgdetail' organization.orgID %}'">
+        <td>{{organization.orgName}}</td>
         <td>{{organization.orgContact}}</td>
         <td>{{organization.orgPhone}}</td>
         <td>{{organization.orgEmail}}</td>
-    </tbody>       
+    </tr>       
 {% endfor %}
 </table>
 {% endblock %}

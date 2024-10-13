@@ -3,6 +3,7 @@
 {% block content %}
 <title>Our Pets</title>
 <h1>Our Pets</h1>
+Click a row in the table to be taken to that pet's profile.
 <table>
     <tr>
         <th>Image</th>
@@ -16,7 +17,7 @@
         <th>Foster</th>
     </tr>
     {% for pet in pets %}
-        <tr>
+        <tr class='clickable' onclick="window.location='{% url 'petdetail' pet.petID %}'">
             <td>
                 {% if pet.petImage %}
                     <img src="{{ pet.petImage.url }}" class="thumbnail">
@@ -24,7 +25,7 @@
                     No image
                 {% endif %}
             </td>
-            <td><a href="{% url 'petdetail' pet.petID %}">{{ pet.petName }}</a></td>
+            <td>{{ pet.petName }}</td>
             <td>{{ pet.petType }}</td>
             <td>{{ pet.petSex }}</td>
             <td>{{ pet.petDOB }}</td>

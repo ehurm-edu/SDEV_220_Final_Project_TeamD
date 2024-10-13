@@ -14,14 +14,36 @@
         <p><strong>Email:</strong> <a href="mailto:{{ foster.fosterEmail }}">{{ foster.fosterEmail }}</a></p>
         <p><strong>Phone:</strong> <a href="tel:{{ foster.fosterPhone }}">{{ foster.fosterPhone }}</a></p>
 
-        <h2>Currently Fostering:</h2>
-        <ul>
-            {% for pet in fostering %}
-                <li><a href="{% url 'petdetail' pet.petID %}">{{ pet.petName }}</a></li>
-            {% empty %}
-                <li>No pets currently being fostered.</li>
-            {% endfor %}
-        </ul>
+        
+        {% if fosteringCount == 0 %}
+            <h2>No pets currently being fostered.</h2>
+        {% else %}
+            <table>
+                <th colspan="4" text-align><center>Currently Fostering</center></th>
+                {% for pet in fostering %}
+                <tr class='clickable' onclick="window.location='{% url 'petdetail' pet.petID %}'">
+                    <td>
+                        {% if pet.petImage %}
+                            <img src="{{ pet.petImage.url }}" class="thumbnail">
+                        {% else %}
+
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ pet.petName }}
+                    </td>
+                    <td>
+                        {{ pet.petType }}
+                    </td>
+                    <td>
+                        {{ pet.petStatus }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            Click a row in the table to be taken to that pet's profile.
+        {% endif %}
+
     </div>
 </div>
 
