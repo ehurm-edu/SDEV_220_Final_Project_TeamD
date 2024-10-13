@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from PetTracker.forms import PetForm, OrgForm, FosterForm
 from .models import Pet, Foster, Organization
 
+
 # Home page
 def index(request):
     return render(request, 'index.html')

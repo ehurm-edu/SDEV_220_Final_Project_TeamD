@@ -1,20 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<title>Fosters</title>
-<h1>Fosters</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>e-mail</th>
-        <th>Phone</th>
-    </tr>
-{% for foster in fosters %}
-    <tbody>
-        <td><a href="{% url 'fosterdetail' foster.fosterID %}"> {{foster.fosterName}}</a></td>
-        <td>{{foster.fosterEmail}}</td>
-        <td>{{foster.fosterPhone}}</td>
-    </tbody>       
-{% endfor %}
-</table>
+
+{% if request.user.is_authenticated %}
+    <title>Fosters</title>
+    <h1>Fosters</h1>
+    <p>Click a row in the table to be taken to that foster's profile.</p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>e-mail</th>
+            <th>Phone</th>
+        </tr>
+    {% for foster in fosters %}
+        <tr class='clickable' onclick="window.location='{% url 'fosterdetail' foster.fosterID %}'">
+            <td>{{foster.fosterName}}</td>
+            <td>{{foster.fosterEmail}}</td>
+            <td>{{foster.fosterPhone}}</td>
+        </tr>       
+    {% endfor %}
+    </table>
+{% else %}
+    <p>You do not have permission to access this page. Please <a href="/login" class="btn-link">log in</a>.</p>
+{% endif %}
+
 {% endblock %}

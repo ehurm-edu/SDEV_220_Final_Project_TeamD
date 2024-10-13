@@ -1,54 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<title>Add an Organization</title>
-<h1>Add an Organization</h1>
 
-<div class="form-container">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        
-        <div class="form-group">
-            <label for="id_orgName">Organization Name</label>
-            {{ orgFormKey.orgName }}
+{% if request.user.is_authenticated %}
+    <title>Add an Organization</title>
+    <h1>Add an Organization</h1>
+    
+    {% load user_tags %}
+    {% if request.user|in_group:'admins' or request.user|in_group:'superadmins' %}
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_orgName">Organization Name</label>
+                    {{ orgFormKey.orgName }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_orgContact">Contact Name</label>
+                    {{ orgFormKey.orgContact }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_orgStreet">Street</label>
+                    {{ orgFormKey.orgStreet }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_orgCity">City</label>
+                    {{ orgFormKey.orgCity }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_orgState">State</label>
+                    {{ orgFormKey.orgState }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_orgZip">Zip Code</label>
+                    {{ orgFormKey.orgZip }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_orgEmail">Email</label>
+                    {{ orgFormKey.orgEmail }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_orgPhone">Phone</label>
+                    {{ orgFormKey.orgPhone }}
+                </div>
+
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
         </div>
+    {% else %}
+        <p>You do not have permission to add organizations. Please talk to your administrator.</p>
+    {% endif %}
+{% else %}
+    <title>Access Denied</title>
+    <p>You do not have permission to access this page. Please <a href="/login" class="btn-link">log in</a>.</p>
+{% endif %}
 
-        <div class="form-group">
-            <label for="id_orgContact">Contact Name</label>
-            {{ orgFormKey.orgContact }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_orgStreet">Street</label>
-            {{ orgFormKey.orgStreet }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_orgCity">City</label>
-            {{ orgFormKey.orgCity }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_orgState">State</label>
-            {{ orgFormKey.orgState }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_orgZip">Zip Code</label>
-            {{ orgFormKey.orgZip }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_orgEmail">Email</label>
-            {{ orgFormKey.orgEmail }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_orgPhone">Phone</label>
-            {{ orgFormKey.orgPhone }}
-        </div>
-
-        <button type="submit" class="btn-submit">Submit</button>
-    </form>
-</div>
 {% endblock %}

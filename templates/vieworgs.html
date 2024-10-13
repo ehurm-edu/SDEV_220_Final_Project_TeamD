@@ -1,23 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<title>Organizations</title>
-<h1>Organizations</h1>
-Click a row in the table to be taken to that organization's profile.
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Contact Person</th>
-        <th>Contact Phone</th>
-        <th>Contact e-mail</th>
-    </tr>
-{% for organization in organizations %}
-    <tr class='clickable' onclick="window.location='{% url 'orgdetail' organization.orgID %}'">
-        <td>{{organization.orgName}}</td>
-        <td>{{organization.orgContact}}</td>
-        <td>{{organization.orgPhone}}</td>
-        <td>{{organization.orgEmail}}</td>
-    </tr>       
-{% endfor %}
-</table>
+
+{% if request.user.is_authenticated %}
+    <title>Organizations</title>
+    <h1>Organizations</h1>
+    <p>Click a row in the table to be taken to that organization's profile.</p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Contact Person</th>
+            <th>Contact Phone</th>
+            <th>Contact e-mail</th>
+        </tr>
+    {% for organization in organizations %}
+        <tr class='clickable' onclick="window.location='{% url 'orgdetail' organization.orgID %}'">
+            <td>{{organization.orgName}}</td>
+            <td>{{organization.orgContact}}</td>
+            <td>{{organization.orgPhone}}</td>
+            <td>{{organization.orgEmail}}</td>
+        </tr>       
+    {% endfor %}
+    </table>
+{% else %}
+    <p>You do not have permission to access this page. Please <a href="/login" class="btn-link">log in</a>.</p>
+{% endif %}
+
 {% endblock %}

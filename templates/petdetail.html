@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <title>{{ pet.petName }}'s Profile</title>
 <h1>{{ pet.petName }}'s Profile</h1>
 
@@ -21,14 +22,18 @@
         <p><strong>Spayed/Neutered:</strong> {{ pet.petSpayNeuter }}</p>
         <p><strong>Status:</strong> {{ pet.petStatus }}</p>
 
-        {% if pet.petOrganization %}
-            <p><strong>Organization:</strong> <a href="{% url 'orgdetail' pet.petOrganization.orgID %}">{{ pet.petOrganization }}</a></p>
-        {% endif %}
+        {% if request.user.is_authenticated %}
+            {% if pet.petOrganization %}
+                <p><strong>Organization:</strong> <a href="{% url 'orgdetail' pet.petOrganization.orgID %}">{{ pet.petOrganization }}</a></p>
+            {% endif %}
 
-        {% if pet.petFoster %}
-            <p><strong>Foster:</strong> <a href="{% url 'fosterdetail' pet.petFoster.fosterID %}">{{ pet.petFoster }}</a></p>
+            {% if pet.petFoster %}
+                <p><strong>Foster:</strong> <a href="{% url 'fosterdetail' pet.petFoster.fosterID %}">{{ pet.petFoster }}</a></p>
+            {% endif %}
+        {% else %}
+            <p>Please <a href="/login" class="btn-link">log in</a> to see foster and organization info.</p>
         {% endif %}
-
+        
         <p><strong>Bio:</strong></p>
         <p>{{ pet.petBio }}</p>
     </div>
@@ -37,4 +42,5 @@
 <div class="back-link">
     <a href="{% url 'viewpets' %}">See All Pets</a>
 </div>
+
 {% endblock %}

@@ -1,52 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<title>{{ org.orgName }}'s Profile</title>
-<h1>{{ org.orgName }}'s Profile</h1>
 
-<div class="org-details-container">
-    <div class="org-info">
-        <p><strong>Name:</strong> {{ org.orgName }}</p>
-        <p><strong>Contact:</strong> {{ org.orgContact }}</p>
-        <p><strong>Street:</strong> {{ org.orgStreet }}</p>
-        <p><strong>City:</strong> {{ org.orgCity }}</p>
-        <p><strong>State:</strong> {{ org.orgState }}</p>
-        <p><strong>Zip Code:</strong> {{ org.orgZip }}</p>
-        <p><strong>Email:</strong> <a href="mailto:{{ org.orgEmail }}">{{ org.orgEmail }}</a></p>
-        <p><strong>Phone:</strong> <a href="tel:{{ org.orgPhone }}">{{ org.orgPhone }}</a></p>
+{% if request.user.is_authenticated %}
+    <title>{{ org.orgName }}'s Profile</title>
+    <h1>{{ org.orgName }}'s Profile</h1>
 
-        {% if currentCount == 0 %}
-            <h2>No pets currently being fostered.</h2>
-        {% else %}
-            <table>
-                <th colspan="4" text-align><center>Current Pets</center></th>
-                {% for pet in current %}
-                <tr class='clickable' onclick="window.location='{% url 'petdetail' pet.petID %}'">
-                    <td>
-                        {% if pet.petImage %}
-                            <img src="{{ pet.petImage.url }}" class="thumbnail">
-                        {% else %}
+    <div class="org-details-container">
+        <div class="org-info">
+            <p><strong>Name:</strong> {{ org.orgName }}</p>
+            <p><strong>Contact:</strong> {{ org.orgContact }}</p>
+            <p><strong>Street:</strong> {{ org.orgStreet }}</p>
+            <p><strong>City:</strong> {{ org.orgCity }}</p>
+            <p><strong>State:</strong> {{ org.orgState }}</p>
+            <p><strong>Zip Code:</strong> {{ org.orgZip }}</p>
+            <p><strong>Email:</strong> <a href="mailto:{{ org.orgEmail }}">{{ org.orgEmail }}</a></p>
+            <p><strong>Phone:</strong> <a href="tel:{{ org.orgPhone }}">{{ org.orgPhone }}</a></p>
 
-                        {% endif %}
-                    </td>
-                    <td>
-                        {{ pet.petName }}
-                    </td>
-                    <td>
-                        {{ pet.petType }}
-                    </td>
-                    <td>
-                        {{ pet.petStatus }}
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-            Click a row in the table to be taken to that pet's profile.
-        {% endif %}
+            {% if currentCount == 0 %}
+                <h2>No pets currently being fostered.</h2>
+            {% else %}
+                <table>
+                    <th colspan="4" text-align><center>Current Pets</center></th>
+                    {% for pet in current %}
+                    <tr class='clickable' onclick="window.location='{% url 'petdetail' pet.petID %}'">
+                        <td>
+                            {% if pet.petImage %}
+                                <img src="{{ pet.petImage.url }}" class="thumbnail">
+                            {% else %}
+
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ pet.petName }}
+                        </td>
+                        <td>
+                            {{ pet.petType }}
+                        </td>
+                        <td>
+                            {{ pet.petStatus }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                Click a row in the table to be taken to that pet's profile.
+            {% endif %}
+        </div>
     </div>
-</div>
 
-<div class="back-link">
-    <a href="{% url 'vieworg' %}">See All Organizations</a>
-</div>
+    <div class="back-link">
+        <a href="{% url 'vieworg' %}">See All Organizations</a>
+    </div>
+{% else %}
+    <title>Access Denied</title>
+    <p>You do not have permission to access this page. Please <a href="/login" class="btn-link">log in</a>.</p>
+{% endif %}
+
 {% endblock %}

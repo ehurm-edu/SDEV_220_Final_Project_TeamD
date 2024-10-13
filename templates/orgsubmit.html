@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<title>Thanks</title>
-<h1>Confirmation</h1>
 
-<div class="confirmation-container">
-    <p>Organization added successfully.</p>
+{% if request.user.is_authenticated %}
+    <title>Thanks</title>
+    <h1>Confirmation</h1>
 
-    <div class="confirmation-links">
-        <a href="/addorg" class="btn-link">Add another organization</a>
-        <a href="/vieworgs" class="btn-link">View all organizations</a>
+    <div class="confirmation-container">
+        <p>Organization added successfully.</p>
+
+        <div class="confirmation-links">
+            <a href="/addorg" class="btn-link">Add another organization</a>
+            <a href="/vieworgs" class="btn-link">View all organizations</a>
+        </div>
     </div>
-</div>
+{% else %}
+    <title>Access Denied</title>
+    <p>You do not have permission to access this page. Please <a href="/login" class="btn-link">log in</a>.</p>
+{% endif %}
+
 {% endblock %}

@@ -2,15 +2,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<title>Thank you</title>
-<h1>Confirmation</h1>
 
-<div class="confirmation-container">
-    <p>Foster added successfully.</p>
+{% if request.user.is_authenticated %}
+    <title>Thank you</title>
+    <h1>Confirmation</h1>
 
-    <div class="confirmation-links">
-        <a href="/addfoster" class="btn-link">Add another foster</a>
-        <a href="/viewfosters" class="btn-link">View all fosters</a>
+    <div class="confirmation-container">
+        <p>Foster added successfully.</p>
+
+        <div class="confirmation-links">
+            <a href="/addfoster" class="btn-link">Add another foster</a>
+            <a href="/viewfosters" class="btn-link">View all fosters</a>
+        </div>
     </div>
-</div>
+{% else %}
+    <title>Access Denied</title>
+    <p>You do not have permission to access this page. Please <a href="/login" class="btn-link">log in</a>.</p>
+{% endif %}
+
 {% endblock %}

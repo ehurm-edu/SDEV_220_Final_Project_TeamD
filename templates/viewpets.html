@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <title>Our Pets</title>
 <h1>Our Pets</h1>
-Click a row in the table to be taken to that pet's profile.
+<p>Click a row in the table to be taken to that pet's profile.</p>
+
+{% if not request.user.is_authenticated %}
+    <p>Please <a href="/login" class="btn-link">log in</a> to see foster and organization info.</p>
+{% endif %}
+
 <table>
     <tr>
         <th>Image</th>
@@ -13,8 +19,10 @@ Click a row in the table to be taken to that pet's profile.
         <th>DOB</th>
         <th>Fixed</th>
         <th>Status</th>
-        <th>Organization</th>
-        <th>Foster</th>
+        {% if request.user.is_authenticated %}
+            <th>Organization</th>
+            <th>Foster</th>
+        {% endif %}
     </tr>
     {% for pet in pets %}
         <tr class='clickable' onclick="window.location='{% url 'petdetail' pet.petID %}'">
@@ -31,21 +39,24 @@ Click a row in the table to be taken to that pet's profile.
             <td>{{ pet.petDOB }}</td>
             <td>{{ pet.petSpayNeuter }}</td>
             <td>{{ pet.petStatus }}</td>
-            <td>
-                {% if pet.petOrganization %}
-                    <a href="{% url 'orgdetail' pet.petOrganization.orgID %}">{{ pet.petOrganization }}</a>
-                {% else %}
-                    {{ pet.petOrganization }}
-                {% endif %}
-            </td>
-            <td>
-                {% if pet.petFoster %}
-                <a href="{% url 'fosterdetail' pet.petFoster.fosterID %}">{{ pet.petFoster }}</a>
-                {% else %}
-                    {{ pet.petFoster }}
-                {% endif %}
-            </td>
+            {% if request.user.is_authenticated %}
+                <td>
+                    {% if pet.petOrganization %}
+                        <a href="{% url 'orgdetail' pet.petOrganization.orgID %}">{{ pet.petOrganization }}</a>
+                    {% else %}
+                        {{ pet.petOrganization }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if pet.petFoster %}
+                    <a href="{% url 'fosterdetail' pet.petFoster.fosterID %}">{{ pet.petFoster }}</a>
+                    {% else %}
+                        {{ pet.petFoster }}
+                    {% endif %}
+                </td>
+            {% endif %}
         </tr>
     {% endfor %}
 </table>
+
 {% endblock %}

@@ -1,69 +1,81 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<title>Add a Pet</title>
-<h1>Add a Pet</h1>
 
-<div class="form-container">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        
-        <div class="form-group">
-            <label for="id_petName">Name</label>
-            {{ petFormKey.petName }}
+{% if request.user.is_authenticated %}
+    <title>Add a Pet</title>
+    <h1>Add a Pet</h1>
+    
+    {% load user_tags %}
+    {% if request.user|in_group:'admins' or request.user|in_group:'superadmins' %}
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_petName">Name</label>
+                    {{ petFormKey.petName }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_petType">Type</label>
+                    {{ petFormKey.petType }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_petSex">Sex</label>
+                    {{ petFormKey.petSex }}
+                </div>
+
+                <div class="form-group form-dob">
+                    <label for="id_petDOB">Date of Birth</label>
+                    {{ petFormKey.petDOB }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_petSpayNeuter">Spayed/Neutered</label>
+                    {{ petFormKey.petSpayNeuter }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_petStatus">Status</label>
+                    {{ petFormKey.petStatus }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_petImage">Image</label>
+                    {{ petFormKey.petImage }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_petRecords">Records</label>
+                    {{ petFormKey.petRecords }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_petBio">Bio</label>
+                    {{ petFormKey.petBio }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_petFoster">Foster</label>
+                    {{ petFormKey.petFoster }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_petOrganization">Organization</label>
+                    {{ petFormKey.petOrganization }}
+                </div>
+
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
         </div>
+    {% else %}
+        <p>You do not have permission to add fosters. Please talk to your administrator.</p>
+    {% endif %}
+{% else %}
+    <title>Access Denied</title>
+    <p>You do not have permission to access this page. Please <a href="/login" class="btn-link">log in</a>.</p>
+{% endif %}
 
-        <div class="form-group">
-            <label for="id_petType">Type</label>
-            {{ petFormKey.petType }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_petSex">Sex</label>
-            {{ petFormKey.petSex }}
-        </div>
-
-        <div class="form-group form-dob">
-            <label for="id_petDOB">Date of Birth</label>
-            {{ petFormKey.petDOB }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_petSpayNeuter">Spayed/Neutered</label>
-            {{ petFormKey.petSpayNeuter }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_petStatus">Status</label>
-            {{ petFormKey.petStatus }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_petImage">Image</label>
-            {{ petFormKey.petImage }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_petRecords">Records</label>
-            {{ petFormKey.petRecords }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_petBio">Bio</label>
-            {{ petFormKey.petBio }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_petFoster">Foster</label>
-            {{ petFormKey.petFoster }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_petOrganization">Organization</label>
-            {{ petFormKey.petOrganization }}
-        </div>
-
-        <button type="submit" class="btn-submit">Submit</button>
-    </form>
-</div>
 {% endblock %}

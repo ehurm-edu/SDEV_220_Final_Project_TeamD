@@ -1,53 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<title>{{ foster.fosterName }}'s Profile</title>
-<h1>{{ foster.fosterName }}'s Profile</h1>
 
-<div class="foster-details-container">
-    <div class="foster-info">
-        <p><strong>Name:</strong> {{ foster.fosterName }}</p>
-        <p><strong>Street:</strong> {{ foster.fosterStreet }}</p>
-        <p><strong>City:</strong> {{ foster.fosterCity }}</p>
-        <p><strong>State:</strong> {{ foster.fosterState }}</p>
-        <p><strong>Zip Code:</strong> {{ foster.fosterZip }}</p>
-        <p><strong>Email:</strong> <a href="mailto:{{ foster.fosterEmail }}">{{ foster.fosterEmail }}</a></p>
-        <p><strong>Phone:</strong> <a href="tel:{{ foster.fosterPhone }}">{{ foster.fosterPhone }}</a></p>
+{% if request.user.is_authenticated %}
+    <title>{{ foster.fosterName }}'s Profile</title>
+    <h1>{{ foster.fosterName }}'s Profile</h1>
 
-        
-        {% if fosteringCount == 0 %}
-            <h2>No pets currently being fostered.</h2>
-        {% else %}
-            <table>
-                <th colspan="4" text-align><center>Currently Fostering</center></th>
-                {% for pet in fostering %}
-                <tr class='clickable' onclick="window.location='{% url 'petdetail' pet.petID %}'">
-                    <td>
-                        {% if pet.petImage %}
-                            <img src="{{ pet.petImage.url }}" class="thumbnail">
-                        {% else %}
+    <div class="foster-details-container">
+        <div class="foster-info">
+            <p><strong>Name:</strong> {{ foster.fosterName }}</p>
+            <p><strong>Street:</strong> {{ foster.fosterStreet }}</p>
+            <p><strong>City:</strong> {{ foster.fosterCity }}</p>
+            <p><strong>State:</strong> {{ foster.fosterState }}</p>
+            <p><strong>Zip Code:</strong> {{ foster.fosterZip }}</p>
+            <p><strong>Email:</strong> <a href="mailto:{{ foster.fosterEmail }}">{{ foster.fosterEmail }}</a></p>
+            <p><strong>Phone:</strong> <a href="tel:{{ foster.fosterPhone }}">{{ foster.fosterPhone }}</a></p>
 
-                        {% endif %}
-                    </td>
-                    <td>
-                        {{ pet.petName }}
-                    </td>
-                    <td>
-                        {{ pet.petType }}
-                    </td>
-                    <td>
-                        {{ pet.petStatus }}
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-            Click a row in the table to be taken to that pet's profile.
-        {% endif %}
+            
+            {% if fosteringCount == 0 %}
+                <h2>No pets currently being fostered.</h2>
+            {% else %}
+                <table>
+                    <th colspan="4"><center>Currently Fostering</center></th>
+                    {% for pet in fostering %}
+                    <tr class='clickable' onclick="window.location='{% url 'petdetail' pet.petID %}'">
+                        <td>
+                            {% if pet.petImage %}
+                                <img src="{{ pet.petImage.url }}" class="thumbnail">
+                            {% else %}
 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ pet.petName }}
+                        </td>
+                        <td>
+                            {{ pet.petType }}
+                        </td>
+                        <td>
+                            {{ pet.petStatus }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                Click a row in the table to be taken to that pet's profile.
+            {% endif %}
+
+        </div>
     </div>
-</div>
 
-<div class="back-link">
-    <a href="{% url 'viewfoster' %}">See All Fosters</a>
-</div>
+    <div class="back-link">
+        <a href="{% url 'viewfoster' %}">See All Fosters</a>
+    </div>
+{% else %}
+    <title>Access Denied</title>
+    <p>You do not have permission to access this page. Please <a href="/login" class="btn-link">log in</a>.</p>
+{% endif %}
+
 {% endblock %}
